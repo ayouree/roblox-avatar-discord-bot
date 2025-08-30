@@ -7,40 +7,22 @@ const {
 } = require("discord.js");
 const fs = require("fs");
 const path = require("path");
-const axios = require("axios");
 
-// Path ke data.json
 const dataPath = path.join(__dirname, "..", "data.json");
+const ITEMS_PER_PAGE = 5;
 
-// Fungsi untuk membaca data code dari data.json
 function getCodes() {
   try {
     const raw = fs.readFileSync(dataPath, "utf8");
     if (!raw) return [];
-    // Ganti = ke : jika format json salah
     const fixed = raw.replace(/=/g, ":");
     return JSON.parse(fixed);
   } catch (e) {
+    console.error("Error reading data.json:", e);
     return [];
   }
 }
 
-// Mendapatkan nama item dari API_DETAIL_CATALOG
-async function getItemName(code) {
-  try {
-    // Ganti URL API_DETAIL_CATALOG sesuai kebutuhan
-    const url = `https://catalog.roblox.com/v1/assets/${code}/details?itemType=asset`;
-    const res = await axios.get(url);
-    if (res.status < 200 || res.status >= 300) return "Tidak ditemukan";
-    const data = res.data;
-    // Berdasarkan hasil data API, gunakan field 'name'
-    return data.name || "Tidak ditemukan";
-  } catch (e) {
-    return "Tidak ditemukan";
-  }
-}
-
-// Mendapatkan semua type unik dari data code
 function getTypes(codes) {
   return [...new Set(codes.map((c) => c.type))];
 }
@@ -50,66 +32,55 @@ const data = new SlashCommandBuilder()
   .setDescription("Menampilkan list code asset Roblox berdasarkan type");
 
 async function run({ interaction, client }) {
-  // Use flags for ephemeral instead of deprecated option
   await interaction.deferReply({ flags: 1 << 6 });
 
-  // Ambil data code dari data.json
-  const codes = getCodes();
+  const allCodes = getCodes();
 
-  if (!codes.length) {
+  if (!allCodes.length) {
     return interaction.editReply({
       content: "Data code tidak ditemukan.",
       flags: 1 << 6,
     });
   }
 
-  // Ambil semua type unik
-  const types = getTypes(codes);
-
-  // Default type yang ditampilkan pertama
+  const types = getTypes(allCodes);
   let currentType = types[0];
+  let currentPage = 0;
 
-  // Fungsi untuk membuat embed berdasarkan type
-  async function makeEmbed(type) {
-    // Filter code berdasarkan type
-    const filtered = codes.filter((c) => c.type === type);
+  async function makeEmbed(filteredCodes, page, type) {
+    const totalPages = Math.ceil(filteredCodes.length / ITEMS_PER_PAGE);
+    const startIndex = page * ITEMS_PER_PAGE;
+    const endIndex = startIndex + ITEMS_PER_PAGE;
+    const codesForPage = filteredCodes.slice(startIndex, endIndex);
 
-    // Discord embed fields max: 25
-    // If more than 25, show only first 25 and add a note
-    let limited = filtered.slice(0, 25);
-
-    // Ambil nama item dari API untuk setiap code
-    const fields = await Promise.all(
-      limited.map(async (item) => {
-        const name = await getItemName(item.code);
-        return {
-          name: `${name}`,
-          value: `ID: \`${item.code}\``,
-          inline: false,
-        };
-      })
-    );
+    const fields = codesForPage.map((item) => {
+      const name = item.name || "Tidak ditemukan";
+      const creator = item.creator || "Tidak diketahui";
+      const addedBy = item.addedBy || 'N/A';
+      return {
+        name: `${name} (oleh ${creator})`,
+        value: `ID: \`${item.code}\` | Ditambahkan oleh: ${addedBy}`,
+        inline: false,
+      };
+    });
 
     let embed = new EmbedBuilder()
       .setColor("#ff0000")
       .setTitle(`Daftar Kode Asset Roblox - ${type.charAt(0).toUpperCase() + type.slice(1)}`)
-      .setDescription(`Berikut adalah daftar kode untuk type **${type}**`)
+      .setDescription(`Berikut adalah daftar kode untuk type **${type}**.\n\n**Halaman ${page + 1} dari ${totalPages || 1}**`)
       .addFields(fields)
-      .setFooter({ text: "Data diambil dari data.json & API Roblox" });
+      .setFooter({ text: "BOT Created By 4Youree | Roblox Avatar Discord Bot" });
 
-    if (filtered.length > 25) {
-      embed.setDescription(
-        `Berikut adalah daftar kode untuk type **${type}** (hanya 25 kode pertama yang ditampilkan, gunakan filter untuk melihat lebih banyak)`
-      );
+    if (!filteredCodes.length) {
+      embed.setDescription(`Tidak ada kode untuk type **${type}**.`);
     }
 
     return embed;
   }
 
-  // Fungsi untuk membuat row button type
-  function makeTypeRow(selectedType) {
+  function makeTypeRow(allTypes, selectedType) {
     const row = new ActionRowBuilder();
-    types.forEach((type) => {
+    allTypes.forEach((type) => {
       row.addComponents(
         new ButtonBuilder()
           .setCustomId(`type_${type}`)
@@ -120,39 +91,83 @@ async function run({ interaction, client }) {
     return row;
   }
 
-  // Kirim embed awal
-  const embed = await makeEmbed(currentType);
-  const row = makeTypeRow(currentType);
+  function makePaginationRow(page, totalPages) {
+    const row = new ActionRowBuilder();
+    row.addComponents(
+      new ButtonBuilder()
+        .setCustomId("prev_page")
+        .setLabel("Previous")
+        .setStyle(ButtonStyle.Secondary)
+        .setDisabled(page === 0),
+      new ButtonBuilder()
+        .setCustomId("next_page")
+        .setLabel("Next")
+        .setStyle(ButtonStyle.Secondary)
+        .setDisabled(page >= totalPages - 1 || totalPages === 0)
+    );
+    return row;
+  }
 
-  const reply = await interaction.editReply({
-    embeds: [embed],
-    components: [row],
-    flags: 1 << 6,
-  });
+  async function updateInteractionReply(interactionToUpdate) {
+    const filteredCodes = allCodes.filter((c) => c.type === currentType);
+    const totalPages = Math.ceil(filteredCodes.length / ITEMS_PER_PAGE);
 
-  // Buat collector untuk button type
-  const collector = reply.createMessageComponentCollector({
-    filter: (i) => i.user.id === interaction.user.id && i.customId.startsWith("type_"),
+    if (currentPage >= totalPages && totalPages > 0) {
+      currentPage = totalPages - 1;
+    } else if (totalPages === 0) {
+      currentPage = 0;
+    }
+
+    const embed = await makeEmbed(filteredCodes, currentPage, currentType);
+    const typeRow = makeTypeRow(types, currentType);
+    const paginationRow = makePaginationRow(currentPage, totalPages);
+
+    // Mengembalikan objek pesan yang diperbarui agar collector dapat dibuat di atasnya
+    const message = await interactionToUpdate.editReply({
+      embeds: [embed],
+      components: [typeRow, paginationRow],
+      flags: 1 << 6,
+    });
+    return message;
+  }
+
+  // Tangkap objek pesan dari balasan awal untuk membuat collector
+  const initialReplyMessage = await updateInteractionReply(interaction);
+
+  // Buat collector pada objek pesan yang dikirim, bukan pada channel
+  const collector = initialReplyMessage.createMessageComponentCollector({
+    filter: (i) => i.user.id === interaction.user.id && (i.customId.startsWith("type_") || i.customId === "prev_page" || i.customId === "next_page"),
     time: 120000,
   });
 
   collector.on("collect", async (i) => {
-    const selectedType = i.customId.replace("type_", "");
-    currentType = selectedType;
-    const newEmbed = await makeEmbed(selectedType);
-    const newRow = makeTypeRow(selectedType);
-    await i.update({
-      embeds: [newEmbed],
-      components: [newRow],
-    });
+    await i.deferUpdate();
+
+    if (i.customId.startsWith("type_")) {
+      currentType = i.customId.replace("type_", "");
+      currentPage = 0;
+    } else if (i.customId === "prev_page") {
+      currentPage--;
+    } else if (i.customId === "next_page") {
+      currentPage++;
+    }
+
+    // Panggil updateInteractionReply dengan interaksi komponen untuk memperbarui pesan
+    await updateInteractionReply(i);
   });
 
   collector.on("end", async () => {
-    // Disable semua button setelah waktu habis
-    const disabledRow = makeTypeRow(currentType);
-    disabledRow.components.forEach((btn) => btn.setDisabled(true));
+    const filteredCodes = allCodes.filter((c) => c.type === currentType);
+    const totalPages = Math.ceil(filteredCodes.length / ITEMS_PER_PAGE);
+
+    const disabledTypeRow = makeTypeRow(types, currentType);
+    disabledTypeRow.components.forEach((btn) => btn.setDisabled(true));
+
+    const disabledPaginationRow = makePaginationRow(currentPage, totalPages);
+    disabledPaginationRow.components.forEach((btn) => btn.setDisabled(true));
+
     await interaction.editReply({
-      components: [disabledRow],
+      components: [disabledTypeRow, disabledPaginationRow],
       flags: 1 << 6,
     });
   });

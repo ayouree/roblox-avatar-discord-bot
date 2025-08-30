@@ -39,3 +39,129 @@ Require stack:
     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
     at async Object.run (C:\Users\Admin\Documents\GitHub\roblox-avatar-discord-bot\commands\codes.js:110:17)
     at async Client.<anonymous> (C:\Users\Admin\Documents\GitHub\roblox-avatar-discord-bot\node_modules\commandkit\dist\index.js:643:7)
+2025-08-30T09:31:19.631Z - TypeError [ColorConvert]: Unable to convert "#FF0000FF" to a number.
+    at resolveColor (C:\Users\Ryuu Laptop\Documents\GitHub\roblox-avatar-discord-bot\node_modules\discord.js\src\util\Util.js:299:11)
+    at EmbedBuilder.setColor (C:\Users\Ryuu Laptop\Documents\GitHub\roblox-avatar-discord-bot\node_modules\discord.js\src\structures\EmbedBuilder.js:23:36)
+    at Object.run (C:\Users\Ryuu Laptop\Documents\GitHub\roblox-avatar-discord-bot\commands\add.js:136:6)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async Client.<anonymous> (C:\Users\Ryuu Laptop\Documents\GitHub\roblox-avatar-discord-bot\node_modules\commandkit\dist\index.js:643:7)
+2025-08-30T09:31:19.632Z - TypeError [ColorConvert]: Unable to convert "#FF0000FF" to a number.
+    at resolveColor (C:\Users\Ryuu Laptop\Documents\GitHub\roblox-avatar-discord-bot\node_modules\discord.js\src\util\Util.js:299:11)
+    at EmbedBuilder.setColor (C:\Users\Ryuu Laptop\Documents\GitHub\roblox-avatar-discord-bot\node_modules\discord.js\src\structures\EmbedBuilder.js:23:36)
+    at Object.run (C:\Users\Ryuu Laptop\Documents\GitHub\roblox-avatar-discord-bot\commands\add.js:136:6)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async Client.<anonymous> (C:\Users\Ryuu Laptop\Documents\GitHub\roblox-avatar-discord-bot\node_modules\commandkit\dist\index.js:643:7)
+2025-08-30T09:31:42.778Z - C:\Users\Ryuu Laptop\Documents\GitHub\roblox-avatar-discord-bot\commands\add.js:136
+    .setColor(#) // Warna hijau untuk sukses
+              ^
+
+SyntaxError: Invalid or unexpected token
+    at internalCompileFunction (node:internal/vm:73:18)
+    at wrapSafe (node:internal/modules/cjs/loader:1153:20)
+    at Module._compile (node:internal/modules/cjs/loader:1205:27)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1295:10)
+    at Module.load (node:internal/modules/cjs/loader:1091:32)
+    at Module._load (node:internal/modules/cjs/loader:938:12)
+    at cjsLoader (node:internal/modules/esm/translators:283:17)
+    at ModuleWrap.<anonymous> (node:internal/modules/esm/translators:233:7)
+    at ModuleJob.run (node:internal/modules/esm/module_job:217:25)
+    at async ModuleLoader.import (node:internal/modules/esm/loader:308:24)
+2025-08-30T09:31:44.277Z - C:\Users\Ryuu Laptop\Documents\GitHub\roblox-avatar-discord-bot\commands\add.js:136
+    .setColor(#FF0000) // Warna hijau untuk sukses
+             ^
+
+SyntaxError: Private field '#FF0000' must be declared in an enclosing class
+    at internalCompileFunction (node:internal/vm:73:18)
+    at wrapSafe (node:internal/modules/cjs/loader:1153:20)
+    at Module._compile (node:internal/modules/cjs/loader:1205:27)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1295:10)
+    at Module.load (node:internal/modules/cjs/loader:1091:32)
+    at Module._load (node:internal/modules/cjs/loader:938:12)
+    at cjsLoader (node:internal/modules/esm/translators:283:17)
+    at ModuleWrap.<anonymous> (node:internal/modules/esm/translators:233:7)
+    at ModuleJob.run (node:internal/modules/esm/module_job:217:25)
+    at async ModuleLoader.import (node:internal/modules/esm/loader:308:24)
+2025-08-30T09:33:18.286Z - C:\Users\Ryuu Laptop\Documents\GitHub\roblox-avatar-discord-bot\commands\codes.js:1
+aconst {
+       ^
+
+SyntaxError: Unexpected token '{'
+    at internalCompileFunction (node:internal/vm:73:18)
+    at wrapSafe (node:internal/modules/cjs/loader:1153:20)
+    at Module._compile (node:internal/modules/cjs/loader:1205:27)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1295:10)
+    at Module.load (node:internal/modules/cjs/loader:1091:32)
+    at Module._load (node:internal/modules/cjs/loader:938:12)
+    at cjsLoader (node:internal/modules/esm/translators:283:17)
+    at ModuleWrap.<anonymous> (node:internal/modules/esm/translators:233:7)
+    at ModuleJob.run (node:internal/modules/esm/module_job:217:25)
+    at async ModuleLoader.import (node:internal/modules/esm/loader:308:24)
+2025-08-30T09:43:38.209Z - TypeError: Cannot read properties of null (reading 'createMessageComponentCollector')
+    at Object.run (C:\Users\Ryuu Laptop\Documents\GitHub\roblox-avatar-discord-bot\commands\codes.js:134:41)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async Client.<anonymous> (C:\Users\Ryuu Laptop\Documents\GitHub\roblox-avatar-discord-bot\node_modules\commandkit\dist\index.js:643:7)
+2025-08-30T09:43:38.214Z - TypeError: Cannot read properties of null (reading 'createMessageComponentCollector')
+    at Object.run (C:\Users\Ryuu Laptop\Documents\GitHub\roblox-avatar-discord-bot\commands\codes.js:134:41)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async Client.<anonymous> (C:\Users\Ryuu Laptop\Documents\GitHub\roblox-avatar-discord-bot\node_modules\commandkit\dist\index.js:643:7)
+2025-08-30T09:44:55.019Z - TypeError: Cannot read properties of null (reading 'createMessageComponentCollector')
+    at Object.run (C:\Users\Ryuu Laptop\Documents\GitHub\roblox-avatar-discord-bot\commands\codes.js:134:41)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async Client.<anonymous> (C:\Users\Ryuu Laptop\Documents\GitHub\roblox-avatar-discord-bot\node_modules\commandkit\dist\index.js:643:7)
+2025-08-30T09:44:55.021Z - TypeError: Cannot read properties of null (reading 'createMessageComponentCollector')
+    at Object.run (C:\Users\Ryuu Laptop\Documents\GitHub\roblox-avatar-discord-bot\commands\codes.js:134:41)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async Client.<anonymous> (C:\Users\Ryuu Laptop\Documents\GitHub\roblox-avatar-discord-bot\node_modules\commandkit\dist\index.js:643:7)
+2025-08-30T09:45:36.602Z - C:\Users\Ryuu Laptop\Documents\GitHub\roblox-avatar-discord-bot\commands\add.js:1
+aconst { SlashCommandBuilder, EmbedBuilder } = require("discord.js");
+       ^
+
+SyntaxError: Unexpected token '{'
+    at internalCompileFunction (node:internal/vm:73:18)
+    at wrapSafe (node:internal/modules/cjs/loader:1153:20)
+    at Module._compile (node:internal/modules/cjs/loader:1205:27)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1295:10)
+    at Module.load (node:internal/modules/cjs/loader:1091:32)
+    at Module._load (node:internal/modules/cjs/loader:938:12)
+    at cjsLoader (node:internal/modules/esm/translators:283:17)
+    at ModuleWrap.<anonymous> (node:internal/modules/esm/translators:233:7)
+    at ModuleJob.run (node:internal/modules/esm/module_job:217:25)
+    at async ModuleLoader.import (node:internal/modules/esm/loader:308:24)
+2025-08-30T09:49:00.720Z - C:\Users\Ryuu Laptop\Documents\GitHub\roblox-avatar-discord-bot\commands\add.js:1
+aconst { SlashCommandBuilder, EmbedBuilder } = require("discord.js");
+       ^
+
+SyntaxError: Unexpected token '{'
+    at internalCompileFunction (node:internal/vm:73:18)
+    at wrapSafe (node:internal/modules/cjs/loader:1153:20)
+    at Module._compile (node:internal/modules/cjs/loader:1205:27)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1295:10)
+    at Module.load (node:internal/modules/cjs/loader:1091:32)
+    at Module._load (node:internal/modules/cjs/loader:938:12)
+    at cjsLoader (node:internal/modules/esm/translators:283:17)
+    at ModuleWrap.<anonymous> (node:internal/modules/esm/translators:233:7)
+    at ModuleJob.run (node:internal/modules/esm/module_job:217:25)
+    at async ModuleLoader.import (node:internal/modules/esm/loader:308:24)
+2025-08-30T09:55:12.252Z - TypeError: Cannot read properties of null (reading 'createMessageComponentCollector')
+    at Object.run (C:\Users\Ryuu Laptop\Documents\GitHub\roblox-avatar-discord-bot\commands\codes.js:134:41)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async Client.<anonymous> (C:\Users\Ryuu Laptop\Documents\GitHub\roblox-avatar-discord-bot\node_modules\commandkit\dist\index.js:643:7)
+2025-08-30T09:55:12.255Z - TypeError: Cannot read properties of null (reading 'createMessageComponentCollector')
+    at Object.run (C:\Users\Ryuu Laptop\Documents\GitHub\roblox-avatar-discord-bot\commands\codes.js:134:41)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async Client.<anonymous> (C:\Users\Ryuu Laptop\Documents\GitHub\roblox-avatar-discord-bot\node_modules\commandkit\dist\index.js:643:7)
+2025-08-30T09:57:23.542Z - C:\Users\Ryuu Laptop\Documents\GitHub\roblox-avatar-discord-bot\commands\codes.js:1
+aconst {
+       ^
+
+SyntaxError: Unexpected token '{'
+    at internalCompileFunction (node:internal/vm:73:18)
+    at wrapSafe (node:internal/modules/cjs/loader:1153:20)
+    at Module._compile (node:internal/modules/cjs/loader:1205:27)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1295:10)
+    at Module.load (node:internal/modules/cjs/loader:1091:32)
+    at Module._load (node:internal/modules/cjs/loader:938:12)
+    at cjsLoader (node:internal/modules/esm/translators:283:17)
+    at ModuleWrap.<anonymous> (node:internal/modules/esm/translators:233:7)
+    at ModuleJob.run (node:internal/modules/esm/module_job:217:25)
+    at async ModuleLoader.import (node:internal/modules/esm/loader:308:24)
