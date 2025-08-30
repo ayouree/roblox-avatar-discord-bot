@@ -1,0 +1,41 @@
+2025-08-29T19:01:25.850Z - Error: ENOENT: no such file or directory, scandir 'C:\Users\Admin\Documents\GitHub\roblox-avatar-discord-bot\events'
+    at async Object.readdir (node:internal/fs/promises:950:18)
+    at async getFolderPaths (C:\Users\Admin\Documents\GitHub\roblox-avatar-discord-bot\node_modules\commandkit\dist\index.js:72:19)
+    at async #buildEvents (C:\Users\Admin\Documents\GitHub\roblox-avatar-discord-bot\node_modules\commandkit\dist\index.js:691:30)
+    at async EventHandler.init (C:\Users\Admin\Documents\GitHub\roblox-avatar-discord-bot\node_modules\commandkit\dist\index.js:687:5)
+    at async #init (C:\Users\Admin\Documents\GitHub\roblox-avatar-discord-bot\node_modules\commandkit\dist\index.js:841:7)
+2025-08-29T19:02:18.665Z - Error: Cannot find module 'axios'
+Require stack:
+- C:\Users\Admin\Documents\GitHub\roblox-avatar-discord-bot\commands\codes.js
+    at Module._resolveFilename (node:internal/modules/cjs/loader:1248:15)
+    at Module._load (node:internal/modules/cjs/loader:1074:27)
+    at TracingChannel.traceSync (node:diagnostics_channel:315:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:217:24)
+    at Module.require (node:internal/modules/cjs/loader:1339:12)
+    at require (node:internal/modules/helpers:135:16)
+    at Object.<anonymous> (C:\Users\Admin\Documents\GitHub\roblox-avatar-discord-bot\commands\codes.js:10:15)
+    at Module._compile (node:internal/modules/cjs/loader:1546:14)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1691:10)
+    at Module.load (node:internal/modules/cjs/loader:1317:32)
+2025-08-29T19:16:09.981Z - Error: Invalid number value
+    at Object.run (C:\Users\Admin\Documents\GitHub\roblox-avatar-discord-bot\node_modules\@sapphire\shapeshift\dist\cjs\index.cjs:1580:72)
+    at C:\Users\Admin\Documents\GitHub\roblox-avatar-discord-bot\node_modules\@sapphire\shapeshift\dist\cjs\index.cjs:972:67
+    at Array.reduce (<anonymous>)
+    at _NumberValidator.parse (C:\Users\Admin\Documents\GitHub\roblox-avatar-discord-bot\node_modules\@sapphire\shapeshift\dist\cjs\index.cjs:972:29)
+    at validateFieldLength (C:\Users\Admin\Documents\GitHub\roblox-avatar-discord-bot\node_modules\@discordjs\builders\dist\index.js:157:24)
+    at EmbedBuilder.addFields (C:\Users\Admin\Documents\GitHub\roblox-avatar-discord-bot\node_modules\@discordjs\builders\dist\index.js:234:5)
+    at makeEmbed (C:\Users\Admin\Documents\GitHub\roblox-avatar-discord-bot\commands\codes.js:91:8)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async Object.run (C:\Users\Admin\Documents\GitHub\roblox-avatar-discord-bot\commands\codes.js:110:17)
+    at async Client.<anonymous> (C:\Users\Admin\Documents\GitHub\roblox-avatar-discord-bot\node_modules\commandkit\dist\index.js:643:7)
+2025-08-29T19:16:09.997Z - Error: Invalid number value
+    at Object.run (C:\Users\Admin\Documents\GitHub\roblox-avatar-discord-bot\node_modules\@sapphire\shapeshift\dist\cjs\index.cjs:1580:72)
+    at C:\Users\Admin\Documents\GitHub\roblox-avatar-discord-bot\node_modules\@sapphire\shapeshift\dist\cjs\index.cjs:972:67
+    at Array.reduce (<anonymous>)
+    at _NumberValidator.parse (C:\Users\Admin\Documents\GitHub\roblox-avatar-discord-bot\node_modules\@sapphire\shapeshift\dist\cjs\index.cjs:972:29)
+    at validateFieldLength (C:\Users\Admin\Documents\GitHub\roblox-avatar-discord-bot\node_modules\@discordjs\builders\dist\index.js:157:24)
+    at EmbedBuilder.addFields (C:\Users\Admin\Documents\GitHub\roblox-avatar-discord-bot\node_modules\@discordjs\builders\dist\index.js:234:5)
+    at makeEmbed (C:\Users\Admin\Documents\GitHub\roblox-avatar-discord-bot\commands\codes.js:91:8)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async Object.run (C:\Users\Admin\Documents\GitHub\roblox-avatar-discord-bot\commands\codes.js:110:17)
+    at async Client.<anonymous> (C:\Users\Admin\Documents\GitHub\roblox-avatar-discord-bot\node_modules\commandkit\dist\index.js:643:7)
